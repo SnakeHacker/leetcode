@@ -17,7 +17,7 @@ import (
 @Author: Mickey
 */
 
-func reverseList(head *ListNode) *ListNode {
+func reverseList2(head *ListNode) *ListNode {
 	if head == nil || head.Next == nil {
 		return head
 	}
@@ -34,4 +34,22 @@ func helper(node *ListNode, pre *ListNode) *ListNode {
 	}
 	tmp.Next = pre
 	return helper(node.Next, &tmp)
+}
+
+func reverseList(head *ListNode) *ListNode {
+	if head == nil || head.Next == nil {
+		return head
+	}
+
+	var preNode *ListNode
+
+	currNode := head
+	for currNode != nil {
+		next := currNode.Next
+		currNode.Next = preNode
+		preNode = currNode
+		currNode = next
+	}
+
+	return preNode
 }
