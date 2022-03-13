@@ -23,3 +23,9 @@ func TestMerge3(t *testing.T) {
 	expected := []int{1}
 	assert.Equal(t, expected, actual)
 }
+
+func TestMerge4(t *testing.T) {
+	actual := merge([]int{1, 2, 3, 0, 0, 0}, 3, []int{2, 5, 6}, 3)
+	expected := []int{1, 2, 2, 3, 5, 6}
+	assert.Equal(t, expected, actual)
+}

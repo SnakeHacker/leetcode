@@ -20,7 +20,7 @@ nums2 = [2,5,6],       n = 3
 @Author: Mickey
 */
 
-func merge(nums1 []int, m int, nums2 []int, n int) []int {
+func merge2(nums1 []int, m int, nums2 []int, n int) []int {
 	p1, p2 := m-1, n-1
 
 	for i := m + n - 1; i >= 0; i-- {
@@ -40,6 +40,76 @@ func merge(nums1 []int, m int, nums2 []int, n int) []int {
 		} else {
 			nums1[i] = nums2[p2]
 			p2--
+		}
+	}
+
+	return nums1
+}
+
+func merge3(nums1 []int, m int, nums2 []int, n int) []int {
+	nums := []int{}
+
+	if len(nums1) == 0 {
+		return nums2
+	}
+
+	if len(nums2) == 0 {
+		return nums1
+	}
+
+	p := 0
+	q := 0
+	for {
+		if p >= m {
+			break
+		}
+
+		if q >= n {
+			break
+		}
+
+		if nums1[p] < nums2[q] {
+			nums = append(nums, nums1[p])
+			p++
+		} else {
+			nums = append(nums, nums2[q])
+			q++
+		}
+	}
+
+	if p < m {
+		nums = append(nums, nums1[p:m]...)
+	}
+
+	if q < n {
+		nums = append(nums, nums2[q:n]...)
+	}
+
+	for i, num := range nums {
+		nums1[i] = num
+	}
+	return nums1
+}
+
+func merge(nums1 []int, m int, nums2 []int, n int) []int {
+	p1 := m - 1
+	p2 := n - 1
+
+	for i := m + n - 1; i >= 0; i-- {
+		if p2 < 0 {
+			return nums1
+		}
+		if p1 < 0 {
+			nums1[i] = nums2[p2]
+			p2--
+			continue
+		}
+		if nums1[p1] < nums2[p2] {
+			nums1[i] = nums2[p2]
+			p2--
+		} else {
+			nums1[p1], nums1[i] = nums1[i], nums1[p1]
+			p1--
 		}
 	}
 

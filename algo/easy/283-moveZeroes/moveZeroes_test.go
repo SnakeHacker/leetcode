@@ -11,3 +11,9 @@ func TestMoveZeroes(t *testing.T) {
 	expected := []int{1, 3, 12, 0, 0}
 	assert.Equal(t, expected, actual)
 }
+
+func TestMoveZeroes2(t *testing.T) {
+	actual := moveZeroes([]int{1, 12, 0, 3, 12, 0})
+	expected := []int{1, 12, 3, 12, 0, 0}
+	assert.Equal(t, expected, actual)
+}

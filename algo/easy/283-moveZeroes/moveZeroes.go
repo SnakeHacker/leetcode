@@ -17,7 +17,7 @@ package moveZeroes
 @Author: Mickey
 */
 
-func moveZeroes(nums []int) []int {
+func moveZeroes2(nums []int) []int {
 	l := 0
 	for i := range nums {
 		if nums[i] != 0 {
@@ -28,5 +28,18 @@ func moveZeroes(nums []int) []int {
 		}
 	}
 
+	return nums
+}
+
+func moveZeroes(nums []int) []int {
+	p := 0
+	for i, num := range nums {
+		if num != 0 {
+			if p != i {
+				nums[i], nums[p] = nums[p], nums[i]
+			}
+			p++
+		}
+	}
 	return nums
 }
