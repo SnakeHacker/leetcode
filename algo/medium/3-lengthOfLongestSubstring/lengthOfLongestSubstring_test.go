@@ -47,3 +47,15 @@ func TestLengthOfLongestSubstring7(t *testing.T) {
 	expected := 2
 	assert.Equal(t, expected, actual)
 }
+
+func TestLengthOfLongestSubstring8(t *testing.T) {
+	actual := lengthOfLongestSubstring("dvdf")
+	expected := 3
+	assert.Equal(t, expected, actual)
+}
+
+func TestLengthOfLongestSubstring9(t *testing.T) {
+	actual := lengthOfLongestSubstring("nfpdmpi")
+	expected := 5
+	assert.Equal(t, expected, actual)
+}

@@ -20,13 +20,12 @@ package twoSum
 
 func twoSum(nums []int, target int) []int {
 	m := make(map[int]int)
-	for i, num := range nums {
-		s, ok := m[num]
-		if ok {
-			return []int{s, i}
-		}
-		m[target-num] = i
-	}
 
+	for i, num := range nums {
+		if j, ok := m[target-num]; ok {
+			return []int{j, i}
+		}
+		m[num] = i
+	}
 	return []int{}
 }

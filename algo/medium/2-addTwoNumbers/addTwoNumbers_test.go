@@ -6,6 +6,25 @@ import (
 	"github.com/stretchr/testify/assert"
 )
 
+func makeListNode(nums []int) *ListNode {
+	l := &ListNode{}
+	for _, num := range nums {
+		addListNode(l, num)
+	}
+	return l.Next
+}
+
+func addListNode(head *ListNode, num int) {
+	tmp := head
+	for tmp.Next != nil {
+		tmp = tmp.Next
+	}
+
+	tmp.Next = &ListNode{
+		Val: num,
+	}
+}
+
 func TestAddTwoNumbers(t *testing.T) {
 	l1 := makeListNode([]int{2, 4, 3})
 	l2 := makeListNode([]int{5, 6, 4})

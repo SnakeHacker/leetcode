@@ -28,6 +28,7 @@ type ListNode struct {
 @Author: Zhangyang, Mickey
 */
 
+// 递归
 func addTwoNumbers(l1 *ListNode, l2 *ListNode) *ListNode {
 	return helper(l1, l2, 0)
 }
@@ -51,21 +52,50 @@ func helper(l1 *ListNode, l2 *ListNode, extra int) *ListNode {
 	return l
 }
 
-func makeListNode(nums []int) *ListNode {
-	l := &ListNode{}
-	for _, num := range nums {
-		addListNode(l, num)
+// 非递归
+func addTwoNumbersV2(l1 *ListNode, l2 *ListNode) *ListNode {
+	if l1 == nil {
+		return l2
 	}
-	return l.Next
-}
-
-func addListNode(head *ListNode, num int) {
-	tmp := head
-	for tmp.Next != nil {
-		tmp = tmp.Next
+	if l2 == nil {
+		return l1
 	}
 
-	tmp.Next = &ListNode{
-		Val: num,
+	res := &ListNode{}
+	head := res
+
+	tmp := 0
+
+	for l1 != nil || l2 != nil {
+		if l1 != nil {
+			tmp += l1.Val
+			l1 = l1.Next
+		}
+
+		if l2 != nil {
+			tmp += l2.Val
+			l2 = l2.Next
+		}
+
+		if tmp >= 10 {
+			res.Val = tmp % 10
+			tmp = 1
+		} else {
+			res.Val = tmp
+			tmp = 0
+		}
+
+		if l1 != nil || l2 != nil {
+			res.Next = &ListNode{}
+			res = res.Next
+		} else {
+			if tmp > 0 {
+				res.Next = &ListNode{Val: tmp}
+				res = res.Next
+				tmp = 0
+			}
+		}
 	}
+
+	return head
 }

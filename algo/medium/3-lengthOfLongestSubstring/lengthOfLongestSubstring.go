@@ -60,3 +60,36 @@ func lengthOfLongestSubstring(s string) int {
 
 	return res
 }
+
+func lengthOfLongestSubstringV2(s string) int {
+	if len(s) < 2 {
+		return len(s)
+	}
+
+	start := 0
+	end := 0
+	res := end - start + 1
+
+	m := make(map[byte]int)
+	for i := range s {
+		_, ok := m[s[i]]
+		end = i
+
+		if ok {
+			for j := start; j < end; j++ {
+				if s[j] == s[i] {
+					start = j + 1
+					break
+				}
+			}
+		}
+
+		m[s[i]] = i
+
+		if res < end-start+1 {
+			res = end - start + 1
+		}
+	}
+
+	return res
+}
